@@ -42,6 +42,17 @@ void setup() {
 
 void loop() {
 
+  // read the input on analog pin 0:
+  int sensorValue = analogRead(A0);
+  // print out the value you read:
+  if(sensorValue < 500) {
+      Serial.println("T"); // send the letter T (for Trigger) once the sensor value is bigger than 200  
+  } else {
+      Serial.println("K");
+  }
+
+  delay(1000);
+
   touchValueBackRight = digitalRead(backSensorRight); // Read values from each sensor
   touchValueBackLeft = digitalRead(backSensorLeft);
   touchValueHead = digitalRead(headSensor);
