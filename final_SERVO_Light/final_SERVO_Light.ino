@@ -17,8 +17,8 @@ int servo_speed = 0; // The speed ranges between -90 and 90. Negative values
 
 int backSensorRight = 2;
 int backSensorLeft = 3;
-int headSensor = 4;
-int frontSensor = 5;
+int headSensor = 6;
+int frontSensor = 7;
 
 int touchValueBackRight = 0; // Variable to store the value coming from the sensor
 int touchValueBackLeft = 0; // Variable to store the value coming from the sensor
@@ -33,17 +33,17 @@ int heldTime = 0;
 void setup() {
   rightHand.attach(9);  // Attaches the servo on pin 9 to the servo object
   leftHand.attach(10); // Attaches the servo on pin 10 to the servo object
-  pinMode(6, OUTPUT); // Set pins 6 and 7 as LED output
-  pinMode(7, OUTPUT);
-  digitalWrite(6, HIGH); // Set pins 6 and 7 to be off at setup
-  digitalWrite(7, HIGH);
+  pinMode(12, OUTPUT); // Set pins 6 and 7 as LED output
+  pinMode(13, OUTPUT);
+  digitalWrite(12, HIGH); // Set pins 6 and 7 to be off at setup
+  digitalWrite(13, HIGH);
   Serial.begin(9600); // Enable the serial terminal for debugging.
 }
 
 void loop() {
 
   // read the input on analog pin 0:
-  int sensorValue = analogRead(A0);
+  int sensorValue = analogRead(A3);
   // print out the value you read:
   if(sensorValue < 500) {
       Serial.println("T"); // send the letter T (for Trigger) once the sensor value is bigger than 200  
@@ -84,8 +84,8 @@ void loop() {
   leftHand.write(set_speed(-40));
   // rightHand.detach();
   // leftHand.detach();
-  digitalWrite(6, HIGH);
-  digitalWrite(7, HIGH); // turn both LEDs off once hugging stops
+  digitalWrite(12, HIGH);
+  digitalWrite(13, HIGH); // turn both LEDs off once hugging stops
   // time = millis();
   delay(1000);
   endPressed = millis();
@@ -97,8 +97,8 @@ void lightLED() {
       startPressed = millis(); // start time of when button was pressed
       heldTime = startPressed - endPressed;
       if (heldTime > 5000) {
-        digitalWrite(6, LOW);
-        digitalWrite(7, LOW);
+        digitalWrite(12, LOW);
+        digitalWrite(13, LOW);
       }
   }
 }
